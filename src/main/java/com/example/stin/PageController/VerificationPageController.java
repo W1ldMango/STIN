@@ -20,12 +20,12 @@ public class VerificationPageController {
         return "verification";
     }
 
-    @PostMapping("/verification")
-    public String verification(int code) {
-//        int SystemCode = userServices.sendCode();
-        if (code == SystemCode) {
-            return "redirect:/";
-        }
-        return "redirect:/verification";
-    }
+//    @PostMapping("/verification")
+//    public String verification(int code) {
+////        int SystemCode = userServices.sendCode();
+//        if (code == SystemCode) {
+//            return "redirect:/";
+//        }
+//        return "redirect:/verification";
+//    }
 }
