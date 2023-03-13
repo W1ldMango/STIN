@@ -20,6 +20,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
         @Query(value = "select code from users where email = ?", nativeQuery = true)
         Integer getCodeByEmail(String email);
 
+        Boolean existsByPasswordAndEmail(String password, String email);
+
 
 
         UserEntity findByEmail(String email);

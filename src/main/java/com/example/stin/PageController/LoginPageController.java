@@ -1,5 +1,7 @@
 package com.example.stin.PageController;
 
+import com.example.stin.Mail.EmailDetails;
+import com.example.stin.Mail.EmailService;
 import com.example.stin.Users.UserEntity;
 import com.example.stin.Users.UserRepository;
 import com.example.stin.Users.UserServices;
@@ -20,6 +22,9 @@ public class LoginPageController {
     @Autowired
     private UserServices userServices;
 
+    @Autowired
+    private EmailService emailService;
+
     @GetMapping("/login")
     public String index() {
         return "login";
@@ -27,8 +32,10 @@ public class LoginPageController {
 
     @PostMapping("/login")
     public String login(@RequestParam String email, @RequestParam String password) {
-        if (userRepo.findByEmail(email) != null && userRepo.findByPassword(password) != null) {
-            userRepo.insertCodeToUser(userServices.sendCode(), email);
+        if (userRepo.existsByPasswordAndEmail(password, email)) {
+            Integer temp_code = userServices.sendCode();
+            emailService.sendSimpleMessage(new EmailDetails(email, "Hello, your verification code is " + temp_code, "Your verification code is"));
+            userRepo.insertCodeToUser(temp_code, email);
             return "redirect:/verification?email=" + email;
         }
         return "redirect:/login";
