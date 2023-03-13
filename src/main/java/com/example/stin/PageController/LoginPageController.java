@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -26,12 +27,10 @@ public class LoginPageController {
 
     @PostMapping("/login")
     public String login(@RequestParam String email, @RequestParam String password) {
-//        String encodedPass = userRepo.encodePassword(password);
         if (userRepo.findByEmail(email) != null && userRepo.findByPassword(password) != null) {
-//            userServices.sendCode();
-            return "redirect:/verification";
+            userRepo.insertCodeToUser(userServices.sendCode(), email);
+            return "redirect:/verification?email=" + email;
         }
-
         return "redirect:/login";
     }
 

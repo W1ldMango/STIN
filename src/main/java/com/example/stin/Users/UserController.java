@@ -25,6 +25,9 @@ public class UserController {
 //        return isUserPresent;
 //    }
 
+//    public String insertCodeToUser(int code, String email) {
+//        return "UPDATE users SET code = ?1 where email = ?2";
+//    }
 
     @GetMapping("/users")
     public List<UserEntity> getUsers() {

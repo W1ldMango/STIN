@@ -9,23 +9,34 @@ import jakarta.persistence.Id;
 @Table(name = "users")
 public class UserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
     private String password;
     private String name;
     private String surname;
 
+    private Integer code;
+
     public UserEntity() {
     }
 
-    public UserEntity(String email, String password, String name, String surname) {
+    public UserEntity(String email, String password, String name, String surname, Integer code) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.surname = surname;
+        this.code = code;
     }
 
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
     public Long getId() {
         return id;
     }
