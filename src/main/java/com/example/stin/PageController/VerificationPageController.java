@@ -24,13 +24,20 @@ public class VerificationPageController {
     @GetMapping("/verification")
     public String index(@RequestParam(value = "email", required = false) String email) {
         whoisit = email;
+        System.out.println(whoisit);
         return "verification";
     }
 
 
-    @PostMapping("/verification")
+//    @PostMapping("/verification")
+    @RequestMapping(value = "/verification", method = RequestMethod.POST)
     public String verification(@RequestParam(value = "code", required = false) Integer code) {
         Integer SystemCode = userRepository.getCodeByEmail(whoisit);
+        System.out.println(code);
+        System.out.println(SystemCode);
+        System.out.println(whoisit);
+        System.out.println(userRepository.findByEmail(whoisit).getPassword());
+        System.out.println(Objects.equals(code, SystemCode));
         if (Objects.equals(code, SystemCode)) {
             return "redirect:/";
         }
