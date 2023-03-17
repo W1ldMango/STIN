@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -16,17 +19,28 @@ public class UserEntity {
     private String name;
     private String surname;
 
+    private String role;
+
     private Integer code;
 
     public UserEntity() {
     }
 
-    public UserEntity(String email, String password, String name, String surname, Integer code) {
+    public UserEntity(String email, String password, String name, String surname,String role, Integer code) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.surname = surname;
+        this.role = role;
         this.code = code;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
 
