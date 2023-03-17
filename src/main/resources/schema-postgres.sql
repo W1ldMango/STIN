@@ -10,5 +10,17 @@ CREATE TABLE users (
     PRIMARY KEY (id)
 );
 
+CREATE TABLE accounts (
+    id SERIAL NOT NULL,
+    account_number INT NOT NULL,
+    balanceUSD INT NOT NULL,
+    balanceEUR INT NOT NULL,
+    balanceCZK INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id) REFERENCES users(id)
+);
+
+DROP TABLE if exists accounts;
+
 
 

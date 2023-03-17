@@ -17,4 +17,12 @@ DELETE FROM users WHERE id = 3;
 DELETE FROM users WHERE id > 4;
 
 SELECT * FROM users;
+private Long accountNumber;
+private Long balanceUSD;
+private Long balanceEUR;
+private Long balanceCZK;
 
+
+INSERT INTO accounts(id, account_number, balanceusd, balanceeur, balanceczk) VALUES (1, 1, 1000, 90, 100);
+
+select * from accounts;

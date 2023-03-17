@@ -6,3 +6,8 @@
     width: 30%;
     align-items: center;
 }
+
+select {
+    border : 0px;
+    outline: 0px;
+}

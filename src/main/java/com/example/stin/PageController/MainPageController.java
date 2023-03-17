@@ -1,5 +1,7 @@
 package com.example.stin.PageController;
 
+import com.example.stin.Bank.AccountEntity;
+import com.example.stin.Bank.AccountRepository;
 import com.example.stin.Users.UserEntity;
 import com.example.stin.Users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class MainPageController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private AccountRepository accountRepository;
+
 
     @GetMapping("/")
     public String index() {
@@ -31,6 +36,15 @@ public class MainPageController {
     public void getUserDetails(Model model, Principal principal) {
         String email = principal.getName();
         UserEntity user = userRepository.findByEmail(email);
+        AccountEntity accountInfo = accountRepository.findAllById(user.getId());
         model.addAttribute("user", user);
+        model.addAttribute("account", accountInfo);
     }
+
+//    @ModelAttribute
+//    public void getAccountDetails(Model model, Principal principal) {
+//        String email = principal.getName();
+//        UserEntity user = userRepository.findByEmail(email);
+//        model.addAttribute("user", user);
+//    }
 }
