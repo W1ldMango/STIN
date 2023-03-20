@@ -2,6 +2,8 @@ package com.example.stin.PageController;
 
 import com.example.stin.Bank.AccountEntity;
 import com.example.stin.Bank.AccountRepository;
+import com.example.stin.CurencyData.CNBData;
+import com.example.stin.CurencyData.CurrencyChange;
 import com.example.stin.Users.UserEntity;
 import com.example.stin.Users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +27,10 @@ public class MainPageController {
 
     @GetMapping("/")
     public String index() {
+
         return "main";
     }
 
-    //How to get the current user's details in a controller?
-    //https://stackoverflow.com/questions/480214/how-do-you-remove-duplicates-from-a-list-in-java
 
 
     @ModelAttribute
@@ -41,10 +42,21 @@ public class MainPageController {
         model.addAttribute("account", accountInfo);
     }
 
-//    @ModelAttribute
-//    public void getAccountDetails(Model model, Principal principal) {
-//        String email = principal.getName();
-//        UserEntity user = userRepository.findByEmail(email);
-//        model.addAttribute("user", user);
-//    }
+    @ModelAttribute
+    public void getCNBData(Model model) {
+        CNBData cnbData = new CNBData();
+        model.addAttribute("USD", cnbData.getUSD());
+        model.addAttribute("EUR", cnbData.getEUR());
+        model.addAttribute("GBP", cnbData.getGBP());
+        model.addAttribute("isValid", cnbData.isDataActual());
+
+    }
+
+    @ModelAttribute
+    public void getCurrencyChanges(Model model) {
+        CurrencyChange getCurrencyChanges = new CurrencyChange();
+        model.addAttribute("euroChanges", getCurrencyChanges.euroChanges());
+        model.addAttribute("usdChanges", getCurrencyChanges.usdChanges());
+        model.addAttribute("gbpChanges", getCurrencyChanges.gbpChanges());
+    }
 }
