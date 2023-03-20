@@ -10,25 +10,10 @@ import org.springframework.stereotype.Service;
 import java.util.Random;
 
 @Service
-public class UserServices implements UserDetailsService {
-
-    @Autowired
-    private UserRepository userRepository;
-
-
-
+public class UserServices {
 
     public Integer sendCode() {
         return new Random().nextInt(999999);
     }
 
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity user = userRepository.findByEmail(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-        return (UserDetails) user;
-    }
 }

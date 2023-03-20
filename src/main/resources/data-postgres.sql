@@ -18,3 +18,7 @@ DELETE FROM users WHERE id > 4;
 
 SELECT * FROM users;
 
+
+INSERT INTO accounts(id, account_number, balanceusd, balanceeur, balanceczk) VALUES (2, 1, 1000, 90, 100);
+
+select * from accounts;
