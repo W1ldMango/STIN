@@ -153,16 +153,25 @@
                                 </option>
                             </select>
                         </p>
-                        <button type="submit" class="btn btn-primary" name="money" value="pay">Pay</button>
-                        <button type="submit" class="btn btn-success" name="money" value="add">Add money</button>
+                        <button type="submit" class="btn btn-primary" name="money" value="Payment">Pay</button>
+                        <button type="submit" class="btn btn-success" name="money" value="Adding">Add money</button>
                     </form>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
+            <div class="row w-125 p-3">
+<!--                <div class="col-md-6" th:width="1000">-->
                     <div class="card mb-4 mb-md-0">
                         <div class="card-body">
                             <p>History</p>
+                            <hr>
+                            <div class="row" style= "height: 100px; overflow-y: scroll;" >
+                                <tr th:each="payment: ${transaction}">
+                                    <td th:text="${payment.getDate()}" style="margin-left: 10px;"></td>
+                                    <td th:text="${payment.getAmount()}"></td>
+                                    <td th:text="${payment.getCurrency()}"></td>
+                                    <td th:text="${payment.getType()}"></td>
+                                    <br>
+                                </tr>
                         </div>
                     </div>
                 </div>
