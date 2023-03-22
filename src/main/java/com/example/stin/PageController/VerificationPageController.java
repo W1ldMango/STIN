@@ -1,18 +1,27 @@
 package com.example.stin.PageController;
 
+import com.example.stin.Mail.EmailDetails;
+import com.example.stin.Mail.EmailService;
+import com.example.stin.Users.UserEntity;
 import com.example.stin.Users.UserRepository;
 import com.example.stin.Users.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.Objects;
 
 @Controller
 public class VerificationPageController {
 
     private static String whoisit;
+
+    @Autowired
+    private EmailService emailService;
 
 
     @Autowired
@@ -22,22 +31,18 @@ public class VerificationPageController {
     private UserRepository userRepository;
 
     @GetMapping("/verification")
-    public String index(@RequestParam(value = "email", required = false) String email) {
-        whoisit = email;
-        System.out.println(whoisit);
+    public String index(Principal principal) {
+        whoisit = principal.getName();
+        Integer temp_code = userServices.sendCode();
+        emailService.sendSimpleMessage(new EmailDetails(whoisit, "Hello, your verification code is " + temp_code, "Your verification code is"));
+        userRepository.insertCodeToUser(temp_code, whoisit);
         return "verification";
     }
 
 
-//    @PostMapping("/verification")
-    @RequestMapping(value = "/verification", method = RequestMethod.POST)
+    @PostMapping("/verification")
     public String verification(@RequestParam(value = "code", required = false) Integer code) {
         Integer SystemCode = userRepository.getCodeByEmail(whoisit);
-        System.out.println(code);
-        System.out.println(SystemCode);
-        System.out.println(whoisit);
-        System.out.println(userRepository.findByEmail(whoisit).getPassword());
-        System.out.println(Objects.equals(code, SystemCode));
         if (Objects.equals(code, SystemCode)) {
             return "redirect:/";
         }

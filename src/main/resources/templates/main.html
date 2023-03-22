@@ -58,11 +58,17 @@
                             </div>
                             <div class="col-sm-9">
                                 <p class="text-muted mb-0">
-                                    <select class="clear">
-                                        <option value="1" selected>[[${account.getBalanceUSD}]] USD</option>
-                                        <option value="2">[[${account.getBalanceEUR}]] EUR</option>
-                                        <option value="3">[[${account.getBalanceCZK}]] CZK</option>
-                                    </select>
+                                        <select class="clear" th:name="keks">
+                                            <option value="1" selected name="usd">
+                                                [[${account.getBalanceUSD}]] USD
+                                            </option>
+                                            <option value="2" name="eur">
+                                                    [[${account.getBalanceEUR}]] EUR
+                                            </option>
+                                            <option value="3" name="czk">
+                                                    [[${account.getBalanceCZK}]] CZK
+                                            </option>
+                                        </select>
                                 </p>
                             </div>
                         </div>
@@ -112,15 +118,15 @@
                         <p>Change</p>
                         <hr>
                         <div class="row">
-                            <p>[[${euroChanges}]]</p>
+                            <p>[[${euroChanges}]]%</p>
                         </div>
                         <hr>
                         <div class="row">
-                            <p>[[${usdChanges}]]</p>
+                            <p>[[${usdChanges}]]%</p>
                         </div>
                         <hr>
                         <div class="row">
-                            <p>[[${gbpChanges}]]</p>
+                            <p>[[${gbpChanges}]]%</p>
                         </div>
                         <hr>
                     </div>
@@ -131,17 +137,41 @@
         <div class="col-md-6">
             <div class="card mb-4 mb-md-0">
                 <div class="card-body">
-                    <form>
+                    <form th:method="post" th:object="${money}" th:action="@{/button}" >
                         <label for="count">Amount</label><br>
-                        <input type="number" min="0.00" id="count" name="count">
+                        <p>
+                            <input type="text" pattern="\d*" id="count" name="count">
+                            <select name="currency_list">
+                                <option value="USD" selected name="usd">
+                                    USD
+                                </option>
+                                <option value="EUR" name="eur">
+                                    EUR
+                                </option>
+                                <option value="CZK" name="czk">
+                                    CZK
+                                </option>
+                            </select>
+                        </p>
+                        <button type="submit" class="btn btn-primary" name="money" value="Payment">Pay</button>
+                        <button type="submit" class="btn btn-success" name="money" value="Adding">Add money</button>
                     </form>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
+            <div class="row w-125 p-3">
+<!--                <div class="col-md-6" th:width="1000">-->
                     <div class="card mb-4 mb-md-0">
                         <div class="card-body">
                             <p>History</p>
+                            <hr>
+                            <div class="row" style= "height: 100px; overflow-y: scroll;" >
+                                <tr th:each="payment: ${transaction}">
+                                    <td th:text="${payment.getDate()}" style="margin-left: 10px;"></td>
+                                    <td th:text="${payment.getAmount()}"></td>
+                                    <td th:text="${payment.getCurrency()}"></td>
+                                    <td th:text="${payment.getType()}"></td>
+                                    <br>
+                                </tr>
                         </div>
                     </div>
                 </div>

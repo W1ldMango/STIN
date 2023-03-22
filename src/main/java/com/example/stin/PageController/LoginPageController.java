@@ -41,7 +41,7 @@ public class LoginPageController {
         System.out.println(bCryptPasswordEncoder.matches(password, userRepo.findByEmail(email).getPassword()));
         if ((userRepo.findByEmail(email) != null) && (bCryptPasswordEncoder.matches(password, userRepo.findByEmail(email).getPassword()))) {
             Integer temp_code = userServices.sendCode();
-//            emailService.sendSimpleMessage(new EmailDetails(email, "Hello, your verification code is " + temp_code, "Your verification code is"));
+            emailService.sendSimpleMessage(new EmailDetails(email, "Hello, your verification code is " + temp_code, "Your verification code is"));
             userRepo.insertCodeToUser(temp_code, email);
             return "redirect:/verification?email=" + email;
 //            return "redirect:/";
