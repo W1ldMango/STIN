@@ -12,13 +12,15 @@ CREATE TABLE users (
 
 DROP TABLE if exists accounts;
 
+DROP TABLE if exists accounts CASCADE;
+
 
 CREATE TABLE accounts (
     id SERIAL NOT NULL UNIQUE,
     account_number INT NOT NULL UNIQUE,
-    balanceUSD INT NOT NULL,
-    balanceEUR INT NOT NULL,
-    balanceCZK INT NOT NULL,
+    balanceUSD INT NULL,
+    balanceEUR INT NULL,
+    balanceCZK INT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES users(id)
 );
@@ -31,7 +33,7 @@ CREATE TABLE transactions (
     account_number INT NOT NULL,
     amount INT NOT NULL,
     currency VARCHAR(3) NOT NULL,
-    date DATE NOT NULL,
+    date timestamp NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (account_number) REFERENCES accounts(account_number)
 );

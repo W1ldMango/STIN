@@ -1,58 +1,39 @@
 package com.example.stin.PageController;
 
-import com.example.stin.Mail.EmailDetails;
-import com.example.stin.Mail.EmailService;
-import com.example.stin.Users.UserEntity;
-import com.example.stin.Users.UserRepository;
-import com.example.stin.Users.UserServices;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+/*
+    * This class is used to handle the login page
+ */
 
 @Controller
 public class LoginPageController {
-    @Autowired
-    private UserRepository userRepo;
 
-    @Autowired
-    private UserServices userServices;
-
-    @Autowired
-    private EmailService emailService;
-
-    @Autowired
-    public BCryptPasswordEncoder bCryptPasswordEncoder;
-
+    /*
+        * This method is used to display the login page
+        * @return String - the login page
+     */
     @GetMapping("/login")
     public String index() {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam String email, @RequestParam String password) {
-        System.out.println(userRepo.findByEmail(email));
-        System.out.println(userRepo.findByEmail(email).getPassword());
-        System.out.println(bCryptPasswordEncoder.matches(password, userRepo.findByEmail(email).getPassword()));
-        if ((userRepo.findByEmail(email) != null) && (bCryptPasswordEncoder.matches(password, userRepo.findByEmail(email).getPassword()))) {
-            Integer temp_code = userServices.sendCode();
-            emailService.sendSimpleMessage(new EmailDetails(email, "Hello, your verification code is " + temp_code, "Your verification code is"));
-            userRepo.insertCodeToUser(temp_code, email);
-            return "redirect:/verification?email=" + email;
-//            return "redirect:/";
+    /*
+        * This method is used to process the logout request
+        * @return redirect to login page
+     */
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/login";
     }
-
-    @GetMapping("/logout")
-    public String logout() {
-        return "redirect:/login";
-    }
-
-
 }

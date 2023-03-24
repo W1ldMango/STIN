@@ -1,4 +1,4 @@
-package com.example.stin.Users;
+package com.example.stin.Users.UserDetails;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +7,9 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 import lombok.Data;
 
+/*
+    * This class is used to create a user entity
+ */
 @Data
 @Entity
 @Table(name = "users")
