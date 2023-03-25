@@ -2,6 +2,10 @@ name: Build and Test
 
 on: [push, pull_request]
 
+env:
+  MAVEN_HOME: /usr/share/maven
+  MAVEN_REPO: /home/runner/.m2/repository
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -18,7 +22,8 @@ jobs:
           cache: maven
 
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
-
-      - name: Test with Maven
-        run: mvn -B test --file pom.xml
+        run: |
+          cd STIN
+          $MAVEN_HOME/bin/mvn package -Dmaven.repo.local=$MAVEN_REPO
+#       - name: Test with Maven
+#         run: mvn -B test --file pom.xml
