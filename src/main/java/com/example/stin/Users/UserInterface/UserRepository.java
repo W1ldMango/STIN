@@ -17,7 +17,7 @@ import java.util.List;
 @Transactional
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-        public UserEntity save(UserEntity userEntity);
+//        public UserEntity save(UserEntity userEntity);
         @Modifying
         @Query(value = "update users set code = ?1 where email = ?2", nativeQuery = true)
         void insertCodeToUser(Integer code, String email);
