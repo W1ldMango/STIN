@@ -18,7 +18,9 @@ jobs:
           cache: maven
           
       - name: List directory contents
-        run: ls
+        run: |
+          cd src/
+          ls
 
       - name: Build with Maven
         run: |
