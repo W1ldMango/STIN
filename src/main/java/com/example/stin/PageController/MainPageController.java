@@ -61,7 +61,6 @@ public class MainPageController {
         MoneyManager moneyManager = new MoneyManager();
         TransactionService transactionService = new TransactionService();
         AccountEntity acc = accountRepository.findAllById(user.getId());
-        System.out.println(transfer);
         if ((amount != null) && (transfer.equals(currency_list))) {
             if (payment_type.equals("Payment") && moneyManager.isEnoughMoney(acc, Double.parseDouble(amount), currency_list)) {
                 moneyManager.payMoney(acc, Double.parseDouble(amount), currency_list);
@@ -92,7 +91,13 @@ public class MainPageController {
      */
     @ModelAttribute
     public void getUserDetails(Model model, Principal principal) {
-        String email = principal.getName();
+        String email = null;
+        try {
+            email = principal.getName();
+        }catch (NullPointerException e) {
+            System.out.println("User is not logged in");
+        }
+
         UserEntity user = userRepository.findByEmail(email);
         AccountEntity accountInfo = accountRepository.findAllById(user.getId());
         List<TransactionEntity> transactionEntityList = transactionRepository.findAllByUserId(accountInfo.getAccountNumber());
