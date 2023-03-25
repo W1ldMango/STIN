@@ -3,7 +3,7 @@ name: Build and Test
 on: [push, pull_request]
 
 env:
-  MAVEN_HOME: /usr/share/maven
+  MAVEN_HOME: /opt/maven
   MAVEN_REPO: /home/runner/.m2/repository
 
 jobs:
