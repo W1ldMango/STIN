@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-/*
+/**
     * This class is used to create a user entity
  */
 @Data

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.List;
 
-/*
+/**
     * This class is used to handle the main page
  */
 @Controller
@@ -35,7 +35,7 @@ public class MainPageController {
     private TransactionRepository transactionRepository;
 
 
-    /*
+    /**
         * This method is used to display the main page
         * @return String - the main page
      */
@@ -44,7 +44,7 @@ public class MainPageController {
         return "main";
     }
 
-    /*
+    /**
         * This method is used to process Addmoney button and Pay button
         * @RequestParam amount - the amount of money
         * @RequestParam payment_type - the type of button (Addmoney or Pay)
@@ -87,7 +87,7 @@ public class MainPageController {
         return "redirect:/";
     }
 
-    /*
+    /**
         * This method is used to add USER attributes to the model and display the main page
      */
     @ModelAttribute
@@ -104,7 +104,7 @@ public class MainPageController {
         model.addAttribute("transaction", transactionEntityList);
     }
 
-    /*
+    /**
         * This method is used to add CNB attributes to the model and display the main page
      */
     @ModelAttribute
@@ -117,7 +117,7 @@ public class MainPageController {
 
     }
 
-    /*
+    /**
         * This method is used to add CurrencyChange attributes to the model and display the main page
      */
     @ModelAttribute

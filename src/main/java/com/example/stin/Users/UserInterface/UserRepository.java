@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/*
+/**
     * This class is used to connect to the database
     * Used to save, update, delete and retrieve data from the database
  */
