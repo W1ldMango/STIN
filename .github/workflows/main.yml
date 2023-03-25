@@ -26,7 +26,6 @@ jobs:
 
       - name: Build with Maven
         run: |
-          cd src
           $MAVEN_HOME/bin/mvn package -Dmaven.repo.local=$MAVEN_REPO
 #       - name: Test with Maven
 #         run: mvn -B test --file pom.xml
