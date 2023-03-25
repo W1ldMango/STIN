@@ -23,10 +23,7 @@ jobs:
           ls
 
       - name: Build with Maven
-        run: |
-          mvn clean
-          mvn compile
-          mvn -B package --file pom.xml
+        run: mvn clean install
 
 #       - name: Test with Maven
 #         run: mvn -B test --file pom.xml
