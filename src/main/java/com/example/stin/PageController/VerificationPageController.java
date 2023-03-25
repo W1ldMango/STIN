@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.Objects;
 
-/*
+/**
     * This class is used to handle the verification page
  */
 @Controller
@@ -29,7 +29,7 @@ public class VerificationPageController {
     @Autowired
     private UserRepository userRepository;
 
-    /*
+    /**
         * This method is used to display the verification page
         * To send the verification code to the user email
         * To insert the verification code to the database
@@ -43,7 +43,7 @@ public class VerificationPageController {
         return "verification";
     }
 
-    /*
+    /**
         * This method is used to process the verification code
         * @RequestParam code - the verification code
         * @return redirect to main page if the code is correct

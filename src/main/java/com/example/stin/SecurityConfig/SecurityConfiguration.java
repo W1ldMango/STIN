@@ -13,13 +13,13 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 
-/*
+/**
     * This class is used to create a security configuration
  */
 @Configuration
 public class SecurityConfiguration {
 
-    /*
+    /**
         * This method is used to create a user details service
         * @return UserDetailsService - the user details service
      */
@@ -28,7 +28,7 @@ public class SecurityConfiguration {
         return new CustomUserDetailService();
     }
 
-    /*
+    /**
         * This method is used to create an authentication provider
         * @return DaoAuthenticationProvider - the authentication provider
      */
@@ -40,7 +40,7 @@ public class SecurityConfiguration {
         return auth;
     }
 
-    /*
+    /**
         * This method is used to create an authentication manager
         * @param AuthenticationConfiguration auth - the authentication configuration
         * @return AuthenticationManager - the authentication manager
@@ -51,7 +51,7 @@ public class SecurityConfiguration {
         return auth.getAuthenticationManager();
     }
 
-    /*
+    /**
         * This method is used to create a security filter chain
         * @param HttpSecurity http - the http security
         * @return SecurityFilterChain - the security filter chain
@@ -81,7 +81,7 @@ public class SecurityConfiguration {
         return http.build();
     }
 
-    /*
+    /**
         * This method is used to create a password encoder
         * @return BCryptPasswordEncoder - the password encoder
      */

@@ -8,14 +8,14 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-/*
+/**
     * This class is used to handle the login page
  */
 
 @Controller
 public class LoginPageController {
 
-    /*
+    /**
         * This method is used to display the login page
         * @return String - the login page
      */
@@ -24,7 +24,7 @@ public class LoginPageController {
         return "login";
     }
 
-    /*
+    /**
         * This method is used to process the logout request
         * @return redirect to login page
      */
