@@ -37,8 +37,6 @@ public class MoneyManager implements MoneyManagerInterface{
      */
     @Override
     public AccountEntity addMoney(AccountEntity account, double money, String currency, String transferCurrency) {
-        System.out.println(BalanceChecker.isBalanceExist(account, transferCurrency));
-        System.out.println(BalanceChecker.isBalanceExist(account, currency));
         if (BalanceChecker.isBalanceExist(account, currency) > 0) {
             switch (currency) {
                 case "CZK" -> {
