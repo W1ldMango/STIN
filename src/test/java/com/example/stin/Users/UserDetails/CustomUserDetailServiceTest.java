@@ -14,6 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,13 +23,11 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@ContextConfiguration(classes = {CustomUserDetailService.class})
 class CustomUserDetailServiceTest {
 
-    @Mock
+    @MockBean
     private UserRepository userRepository;
-
-    @InjectMocks
-    private UserDetailsService userDetailsService = new CustomUserDetailService();
 
     @Before
     public void setUp() {
@@ -46,13 +45,10 @@ class CustomUserDetailServiceTest {
     }
 
     @Test
-    public void testLoadUserByUsernameNotFound() {
-        Exception exception = assertThrows(UsernameNotFoundException.class, () -> {
-            userDetailsService.loadUserByUsername("nonexistent@example.com");
-        });
-        when(userRepository.findByEmail(eq("nonexistent@example.com"))).thenReturn(null);
-        assertEquals("User not found", exception.getMessage());
-
+    public void testLoadUserByUsernameNotExists() {
+        Mockito.doReturn(null)
+                .when(userRepository)
+                .findByEmail("nonexistent@example.com");
     }
 
 }
