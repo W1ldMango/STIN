@@ -67,7 +67,7 @@ public class SecurityConfiguration {
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/verification", true)
+                .defaultSuccessUrl("/", true)
                 .permitAll()
                 .and()
                 .logout(logout -> logout
