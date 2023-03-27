@@ -71,7 +71,7 @@ public class MainPageController {
                 accountRepository.save(acc);
                 transactionRepository.save(transactionService.CreateTransaction(acc, currency_list, Double.parseDouble(amount), payment_type));
             }
-        } else if (amount != null) {
+        } else if ((amount != null) && (BalanceChecker.isBalanceExist(acc, transfer) > 0)) {
             if (payment_type.equals("Payment")) {
                 moneyManager.payMoney(acc, Double.parseDouble(amount), currency_list, transfer);
                 accountRepository.save(acc);
@@ -91,13 +91,7 @@ public class MainPageController {
      */
     @ModelAttribute
     public void getUserDetails(Model model, Principal principal) {
-        String email = null;
-        try {
-            email = principal.getName();
-        }catch (NullPointerException e) {
-            System.out.println("User is not logged in");
-        }
-
+        String email = principal.getName();
         UserEntity user = userRepository.findByEmail(email);
         AccountEntity accountInfo = accountRepository.findAllById(user.getId());
         List<TransactionEntity> transactionEntityList = transactionRepository.findAllByUserId(accountInfo.getAccountNumber());
