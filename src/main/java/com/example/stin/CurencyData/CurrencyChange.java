@@ -1,10 +1,13 @@
 package com.example.stin.CurencyData;
 
+import org.springframework.stereotype.Service;
+
 import java.util.Date;
 
 /**
     * This class is part of the Central Bank of Czech Republic API.
  */
+@Service
 public class CurrencyChange {
 
     /**
