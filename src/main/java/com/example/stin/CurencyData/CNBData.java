@@ -1,6 +1,7 @@
 package com.example.stin.CurencyData;
 
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 
 
+@Service
 public class CNBData {
 
     /**
