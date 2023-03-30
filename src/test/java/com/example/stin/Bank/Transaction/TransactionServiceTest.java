@@ -2,13 +2,8 @@ package com.example.stin.Bank.Transaction;
 
 import com.example.stin.Bank.Account.AccountEntity;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TransactionServiceTest {
 

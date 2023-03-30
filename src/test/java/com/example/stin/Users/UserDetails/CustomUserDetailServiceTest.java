@@ -39,13 +39,15 @@ class CustomUserDetailServiceTest {
 
     @Test
     public void testLoadUserByUsername() {
-        Mockito.doReturn(new UserEntity())
+        UserEntity user = new UserEntity();
+        Mockito.doReturn(user)
                 .when(userRepository)
                 .findByEmail("test@gmail.com");
     }
 
     @Test
     public void testLoadUserByUsernameNotExists() {
+        UserEntity user = new UserEntity();
         Mockito.doReturn(null)
                 .when(userRepository)
                 .findByEmail("nonexistent@example.com");
