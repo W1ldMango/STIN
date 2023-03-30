@@ -18,12 +18,16 @@ jobs:
           cache: maven
 
       - name: Build with Maven
-        run: |
-          mvn clean
-          mvn -B package --file pom.xml
+        run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+      - name: Test with Maven
+        run: mvn test -B
 
-      - name: Test
-        run: mvn test
+      - name: Upload coverage to Codecov
+#        uses: codecov/codecov-action@v3
+        run: |
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov -t ${CODECOV_TOKEN}
 
 
 
