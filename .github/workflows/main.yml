@@ -22,12 +22,8 @@ jobs:
       - name: Test with Maven
         run: mvn test -B
 
-      - name: Upload coverage to Codecov
-#        uses: codecov/codecov-action@v3
-        run: |
-          curl -Os https://uploader.codecov.io/latest/linux/codecov
-          chmod +x codecov
-          ./codecov -t ${CODECOV_TOKEN}
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
 
 
 
