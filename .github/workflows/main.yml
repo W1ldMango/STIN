@@ -24,12 +24,10 @@ jobs:
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./target/site/cobertura/coverage.xml
-          flags: unittests
-          name: codecov-umbrella
-          fail_ci_if_error: true
+        run: |
+          curl -Os https://uploader.codecov.io/latest/macos/codecov
+          chmod +x codecov
+          ./codecov -t ${CODECOV_TOKEN}
 
 
 
