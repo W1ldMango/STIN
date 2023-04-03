@@ -3,9 +3,7 @@ package com.example.stin.WalletController.MoneyManager;
 import com.example.stin.Bank.Account.AccountEntity;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class MoneyManagerTest {
@@ -135,6 +133,237 @@ public class MoneyManagerTest {
     }
 
     @Test
+    void testPayMoney2() {
+        MoneyManager moneyManager = new MoneyManager();
+        AccountEntity account = new AccountEntity();
+        assertSame(account, moneyManager.payMoney(account, 10.0d, "GBP"));
+    }
+
+    @Test
+    void testPayMoney3() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertSame(account, moneyManager.payMoney(account, 10.0d, (String) "CZK"));
+    }
+
+    @Test
+    void testPayMoney4() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertSame(account, moneyManager.payMoney(account, 10.0d, (String) "USD"));
+    }
+
+    @Test
+    void testPayMoney5() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertSame(account, moneyManager.payMoney(account, 10.0d, (String) "EUR"));
+    }
+
+    @Test
+    void testPayMoney6() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(10.0d);
+        AccountEntity actualPayMoneyResult = moneyManager.payMoney(account, 10.0d, (String) "EUR");
+        assertSame(account, actualPayMoneyResult);
+        assertEquals(0.0d, actualPayMoneyResult.getBalanceEUR().doubleValue());
+    }
+
+    @Test
+    void testPayMoney7() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(10.0d);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        AccountEntity actualPayMoneyResult = moneyManager.payMoney(account, 10.0d, (String) "USD");
+        assertSame(account, actualPayMoneyResult);
+        assertEquals(0.0d, actualPayMoneyResult.getBalanceUSD().doubleValue());
+    }
+
+    @Test
+    void testPayMoney8() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(10.0d);
+        account.setBalanceEUR(null);
+        AccountEntity actualPayMoneyResult = moneyManager.payMoney(account, 10.0d, (String) "CZK");
+        assertSame(account, actualPayMoneyResult);
+        assertEquals(0.0d, actualPayMoneyResult.getBalanceCZK().doubleValue());
+    }
+
+    @Test
+    void testPayMoney9() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(0.5d);
+        account.setBalanceEUR(null);
+        assertSame(account, moneyManager.payMoney(account, 10.0d, (String) "CZK"));
+    }
+
+    @Test
+    void testPayMoney11() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(0.5d);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertSame(account, moneyManager.payMoney(account, 10.0d, (String) "USD"));
+    }
+
+    @Test
+    void testPayMoney12() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(0.5d);
+        assertSame(account, moneyManager.payMoney(account, 10.0d, (String) "EUR"));
+    }
+
+    @Test
+    void testPayMoney16() {
+        MoneyManager moneyManager = new MoneyManager();
+        AccountEntity account = new AccountEntity();
+        assertSame(account, moneyManager.payMoney(account, 10.0d, "GBP", "GBP"));
+    }
+
+    @Test
+    void testPayMoney17() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertSame(account, moneyManager.payMoney(account, 10.0d, (String) "CZK", (String) "USD"));
+    }
+
+    @Test
+    void testPayMoney18() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertSame(account, moneyManager.payMoney(account, 10.0d, (String) "CZK", (String) "EUR"));
+    }
+
+    @Test
+    void testPayMoney19() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertSame(account, moneyManager.payMoney(account, 10.0d, (String) "CZK", (String) "CZK"));
+    }
+
+
+    @Test
+    void testPayMoney22() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(10.0d);
+        assertSame(account, moneyManager.payMoney(account, 10.0d, (String) "EUR", (String) "EUR"));
+    }
+
+    @Test
+    void testPayMoney24() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(10.0d);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertSame(account, moneyManager.payMoney(account, 10.0d, (String) "USD", (String) "USD"));
+    }
+
+    @Test
+    void testPayMoney26() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(10.0d);
+        account.setBalanceEUR(null);
+        assertSame(account, moneyManager.payMoney(account, 10.0d, (String) "CZK", (String) "CZK"));
+    }
+
+    @Test
+    void testPayMoney29() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(-0.5d);
+        account.setBalanceEUR(null);
+        assertSame(account, moneyManager.payMoney(account, 10.0d, (String) "CZK", (String) "CZK"));
+    }
+
+
+    @Test
+    void testPayMoney31() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(-0.5d);
+        assertSame(account, moneyManager.payMoney(account, 10.0d, (String) "EUR", (String) "EUR"));
+    }
+
+    @Test
+    void testPayMoney32() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(10.0d);
+        assertSame(account, moneyManager.payMoney(account, 10.0d, (String) "foo", (String) "EUR"));
+    }
+
+    @Test
+    void testPayMoney33() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(-0.5d);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertSame(account, moneyManager.payMoney(account, 10.0d, (String) "USD", (String) "USD"));
+    }
+
+    @Test
     void testPayMoneyWithTransfer() {
         // Create an account with balances in all currencies
         AccountEntity account = new AccountEntity();
@@ -171,6 +400,250 @@ public class MoneyManagerTest {
     }
 
     @Test
+    void testIsEnoughMoney2() {
+        MoneyManager moneyManager = new MoneyManager();
+        assertFalse(moneyManager.isEnoughMoney(new AccountEntity(), 10.0d, "GBP"));
+    }
+
+    @Test
+    void testIsEnoughMoney3() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertFalse(moneyManager.isEnoughMoney(account, 10.0d, (String) "CZK"));
+    }
+
+    @Test
+    void testIsEnoughMoney4() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertFalse(moneyManager.isEnoughMoney(account, 10.0d, (String) "USD"));
+    }
+
+    @Test
+    void testIsEnoughMoney5() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertFalse(moneyManager.isEnoughMoney(account, 10.0d, (String) "EUR"));
+    }
+
+    @Test
+    void testIsEnoughMoney6() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(10.0d);
+        assertTrue(moneyManager.isEnoughMoney(account, 10.0d, (String) "EUR"));
+    }
+
+    @Test
+    void testIsEnoughMoney7() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(10.0d);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertTrue(moneyManager.isEnoughMoney(account, 10.0d, (String) "USD"));
+    }
+
+    @Test
+    void testIsEnoughMoney8() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(10.0d);
+        account.setBalanceEUR(null);
+        assertTrue(moneyManager.isEnoughMoney(account, 10.0d, (String) "CZK"));
+    }
+
+    @Test
+    void testIsEnoughMoney9() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(0.5d);
+        account.setBalanceEUR(null);
+        assertFalse(moneyManager.isEnoughMoney(account, 10.0d, (String) "CZK"));
+    }
+
+    @Test
+    void testIsEnoughMoney11() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(0.5d);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertFalse(moneyManager.isEnoughMoney(account, 10.0d, (String) "USD"));
+    }
+
+    @Test
+    void testIsEnoughMoney12() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(0.5d);
+        assertFalse(moneyManager.isEnoughMoney(account, 10.0d, (String) "EUR"));
+    }
+
+    @Test
+    void testIsEnoughMoney16() {
+        MoneyManager moneyManager = new MoneyManager();
+        assertFalse(moneyManager.isEnoughMoney(new AccountEntity(), 10.0d, "GBP", "GBP"));
+    }
+
+    @Test
+    void testIsEnoughMoney17() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertFalse(moneyManager.isEnoughMoney(account, 10.0d, "foo", (String) "CZK"));
+    }
+
+    @Test
+    void testIsEnoughMoney18() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertFalse(moneyManager.isEnoughMoney(account, 10.0d, "foo", (String) "USD"));
+    }
+
+    @Test
+    void testIsEnoughMoney19() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertFalse(moneyManager.isEnoughMoney(account, 10.0d, "foo", (String) "EUR"));
+    }
+
+    @Test
+    void testIsEnoughMoney20() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(10.0d);
+        assertTrue(moneyManager.isEnoughMoney(account, 10.0d, "foo", (String) "EUR"));
+    }
+
+    @Test
+    void testIsEnoughMoney21() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(10.0d);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertTrue(moneyManager.isEnoughMoney(account, 10.0d, "foo", (String) "USD"));
+    }
+
+    @Test
+    void testIsEnoughMoney22() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(10.0d);
+        account.setBalanceEUR(null);
+        assertTrue(moneyManager.isEnoughMoney(account, 10.0d, "foo", (String) "CZK"));
+    }
+
+    @Test
+    void testIsEnoughMoney23() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(-0.5d);
+        account.setBalanceEUR(null);
+        assertFalse(moneyManager.isEnoughMoney(account, 10.0d, "foo", (String) "CZK"));
+    }
+    @Test
+    void testIsEnoughMoney26() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(-0.5d);
+        account.setBalanceEUR(null);
+        assertFalse(moneyManager.isEnoughMoney(account, 10.0d, "CZK", (String) "CZK"));
+    }
+
+    @Test
+    void testIsEnoughMoney29() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(-0.5d);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertFalse(moneyManager.isEnoughMoney(account, 10.0d, "foo", (String) "USD"));
+    }
+
+    @Test
+    void testIsEnoughMoney30() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(-0.5d);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(null);
+        assertFalse(moneyManager.isEnoughMoney(account, 10.0d, "USD", (String) "USD"));
+    }
+
+    @Test
+    void testIsEnoughMoney33() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(-0.5d);
+        assertFalse(moneyManager.isEnoughMoney(account, 10.0d, "foo", (String) "EUR"));
+    }
+
+    @Test
+    void testIsEnoughMoney35() {
+        MoneyManager moneyManager = new MoneyManager();
+
+        AccountEntity account = new AccountEntity();
+        account.setBalanceUSD(null);
+        account.setBalanceCZK(null);
+        account.setBalanceEUR(-0.5d);
+        assertFalse(moneyManager.isEnoughMoney(account, 10.0d, "EUR", (String) "EUR"));
+    }
+
+
+
+    @Test
     void testIsEnoughMoneyWithTransfer() {
         AccountEntity account = new AccountEntity();
         account.setBalanceCZK(1000.0);
@@ -183,6 +656,43 @@ public class MoneyManagerTest {
         assertTrue(moneyManager.isEnoughMoney(account, 300.0, "USD", "EUR"));
         assertFalse(moneyManager.isEnoughMoney(account, 100.0, "EUR", "CZK"));
         assertFalse(moneyManager.isEnoughMoney(account, 10000.0, "CZK", "USD"));
+    }
+
+    @Test
+    void testPayMoneyWithTransferUsdToOther() {
+        AccountEntity account = new AccountEntity();
+        account.setBalanceCZK(1000.0);
+        account.setBalanceUSD(200.0);
+        account.setBalanceEUR(300.0);
+
+        MoneyManager moneyManager = new MoneyManager();
+
+        moneyManager.payMoney(account, 500.0, "USD", "CZK");
+        assertEquals(1000, account.getBalanceCZK());
+
+        moneyManager.payMoney(account, 300.0, "USD", "EUR");
+        assertNotNull(account.getBalanceEUR());
+
+
+    }
+
+    @Test
+    void testPayMoneyWithTransferEurToOther() {
+        AccountEntity account = new AccountEntity();
+        account.setBalanceCZK(1000.0);
+        account.setBalanceUSD(200.0);
+        account.setBalanceEUR(300.0);
+
+        MoneyManager moneyManager = new MoneyManager();
+
+        moneyManager.payMoney(account, 500.0, "EUR", "CZK");
+        assertEquals(1000, account.getBalanceCZK());
+
+        moneyManager.payMoney(account, 300.0, "EUR", "USD");
+        assertNotNull(account.getBalanceUSD());
+
+
+
     }
 
 

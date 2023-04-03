@@ -4,17 +4,17 @@ import com.example.stin.Bank.Account.AccountEntity;
 import com.example.stin.WalletController.BalanceManager.BalanceChecker;
 
 /**
-    * This class is used to provide transactions with money.
+ * This class is used to provide transactions with money.
  */
 
 public class MoneyManager implements MoneyManagerInterface{
 
     /**
-        * This method is used to add money to the account
-        * @param account - account to which the money will be added
-        * @param money - amount of money to be added
-        * @param currency - currency of the money to be added
-        * @return account - account with added money
+     * This method is used to add money to the account
+     * @param account - account to which the money will be added
+     * @param money - amount of money to be added
+     * @param currency - currency of the money to be added
+     * @return account - account with added money
      */
     public AccountEntity addMoney(AccountEntity account, double money, String currency) {
         if (BalanceChecker.isBalanceExist(account, currency) > 0){
@@ -28,12 +28,12 @@ public class MoneyManager implements MoneyManagerInterface{
     }
 
     /**
-        * This method is used to add money from the one balance to another
-        * @param account - account to which the money will be added
-        * @param money - amount of money to be added
-        * @param currency - currency of the money that used
-        * @param transferCurrency - currency of the money that will be added
-        * @return account - account with added money
+     * This method is used to add money from the one balance to another
+     * @param account - account to which the money will be added
+     * @param money - amount of money to be added
+     * @param currency - currency of the money that used
+     * @param transferCurrency - currency of the money that will be added
+     * @return account - account with added money
      */
     @Override
     public AccountEntity addMoney(AccountEntity account, double money, String currency, String transferCurrency) {
@@ -96,11 +96,11 @@ public class MoneyManager implements MoneyManagerInterface{
     }
 
     /**
-        * This method is used to pay money from the account
-        * @param account - account from which the money will be paid
-        * @param money - amount of money to be paid
-        * @param currency - currency of the money to be paid
-        * @return account - account with paid money
+     * This method is used to pay money from the account
+     * @param account - account from which the money will be paid
+     * @param money - amount of money to be paid
+     * @param currency - currency of the money to be paid
+     * @return account - account with paid money
      */
     @Override
     public AccountEntity payMoney(AccountEntity account, double money, String currency) {
@@ -115,12 +115,12 @@ public class MoneyManager implements MoneyManagerInterface{
     }
 
     /**
-        * This method is used to pay money from the account
-        * @param account - account from which the money will be paid
-        * @param money - amount of money to be paid
-        * @param currency - currency of the money that used
-        * @param transferCurrency - currency of the money that will be paid
-        * @return account - account with paid money
+     * This method is used to pay money from the account
+     * @param account - account from which the money will be paid
+     * @param money - amount of money to be paid
+     * @param currency - currency of the money that used
+     * @param transferCurrency - currency of the money that will be paid
+     * @return account - account with paid money
      */
 
     @Override
@@ -154,11 +154,11 @@ public class MoneyManager implements MoneyManagerInterface{
     }
 
     /**
-        * This method is used to check if the account has enough money
-        * @param account - account to be checked
-        * @param money - amount of money to be checked
-        * @param currency - currency of the money to be checked
-        * @return boolean - true if the account has enough money, false if not
+     * This method is used to check if the account has enough money
+     * @param account - account to be checked
+     * @param money - amount of money to be checked
+     * @param currency - currency of the money to be checked
+     * @return boolean - true if the account has enough money, false if not
      */
     @Override
     public boolean isEnoughMoney(AccountEntity account, double money, String currency) {
@@ -184,12 +184,12 @@ public class MoneyManager implements MoneyManagerInterface{
     }
 
     /**
-        * This method is used to check if the account has enough money
-        * @param account - account to be checked
-        * @param money - amount of money to be checked
-        * @param currency - currency of the money that used
-        * @param transferCurrency - currency of the money that will be paid
-        * @return boolean - true if the account has enough money, false if not
+     * This method is used to check if the account has enough money
+     * @param account - account to be checked
+     * @param money - amount of money to be checked
+     * @param currency - currency of the money that used
+     * @param transferCurrency - currency of the money that will be paid
+     * @return boolean - true if the account has enough money, false if not
      */
     @Override
     public boolean isEnoughMoney(AccountEntity account, double money, String currency, String transferCurrency) {

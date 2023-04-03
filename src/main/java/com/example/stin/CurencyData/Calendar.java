@@ -2,6 +2,9 @@ package com.example.stin.CurencyData;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -27,89 +30,34 @@ public class Calendar {
         * This method is used to get information of last thursday.
         * To check last CNB data update on weekends.
      */
-    public Date getThursdayDate(){
+    public String getThursdayDate(){
+        LocalDate date1 = LocalDate.now();
+        LocalDate lastThursday = date1.with(DayOfWeek.THURSDAY).minusWeeks(1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        return lastThursday.format(formatter);
+    }
+
+    /**
+     * This method is used to get information of today.
+     * @return - today's date
+     */
+    public String getNow() {
         Date date = new Date();
-        int day = date.getDay();
         int dayOfMonth = date.getDate();
         int month = date.getMonth() + 1;
-        int year = date.getYear();
-        int thursday = 0;
-        switch (day) {
-            case 0:
-                thursday = dayOfMonth - 3;
-                break;
-            case 1:
-                thursday = dayOfMonth - 4;
-                break;
-            case 2:
-                thursday = dayOfMonth - 5;
-                break;
-            case 3:
-                thursday = dayOfMonth - 6;
-                break;
-            case 4:
-                thursday = dayOfMonth - 7;
-                break;
-            case 5:
-                thursday = dayOfMonth - 1;
-                break;
-            case 6:
-                thursday = dayOfMonth - 2;
-                break;
-        }
-        String thursdayString = thursday + "." + month + "." + 2023;
-        Date format = null;
-        try {
-            format = new SimpleDateFormat("dd.MM.yyyy").parse(thursdayString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return format;
+        return dayOfMonth + "." + month + "." + 2023;
     }
 
     /**
         * This method is used to get information of yesterday.
         * To check currency change in last 24 hours.
      */
-    public Date getYesterdayDate() {
-        Date date = new Date();
-        int day = date.getDay();
-        int dayOfMonth = date.getDate();
-        int month = date.getMonth();
-        int year = date.getYear();
-        int yesterday = 0;
-        switch (day) {
-            case 1:
-                yesterday = dayOfMonth - 1;
-                break;
-            case 2:
-                yesterday = dayOfMonth - 2;
-                break;
-            case 3:
-                yesterday = dayOfMonth - 3;
-                break;
-            case 4:
-                yesterday = dayOfMonth - 4;
-                break;
-            case 5:
-                yesterday = dayOfMonth - 5;
-                break;
-            case 6:
-                yesterday = dayOfMonth - 6;
-                break;
-            case 7:
-                yesterday = dayOfMonth - 7;
-                break;
-        }
-        String yesterdayString = yesterday + "." + month + "." + 2023;
-        Date format = null;
-        try {
-            format = new SimpleDateFormat("dd.MM.yyyy").parse(yesterdayString);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return format;
+    public String getYesterdayDate() {
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        cal.add(java.util.Calendar.DATE, -1);
+        int yesterday = cal.get(java.util.Calendar.DATE);
+        int month = cal.get(java.util.Calendar.MONTH) + 1;
+        return yesterday + "." + month + "." + 2023;
     }
 
     /**
@@ -118,11 +66,7 @@ public class Calendar {
      */
 
     public boolean isMonday() {
-        if (new Date().getDay() == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return new Date().getDay() == 1;
 
     }
 

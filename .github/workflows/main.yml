@@ -19,15 +19,11 @@ jobs:
 
       - name: Build with Maven
         run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-      - name: Test with Maven
+
+      - name: Test
         run: mvn test -B
 
-      - name: Upload coverage to Codecov
-#        uses: codecov/codecov-action@v3
-        run: |
-          curl -Os https://uploader.codecov.io/latest/linux/codecov
-          chmod +x codecov
-          ./codecov -t ${CODECOV_TOKEN}
-
-
-
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+            token: ${{ secrets.CODECOV_TOKEN }}

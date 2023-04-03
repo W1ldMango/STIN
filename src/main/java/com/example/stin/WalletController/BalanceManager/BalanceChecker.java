@@ -7,6 +7,12 @@ import com.example.stin.Bank.Account.AccountEntity;
  */
 public class BalanceChecker {
 
+    /**
+     * This method is used to check if the balance is not null and return the balance in the currency
+     * @param acc - the account
+     * @param currency - the currency
+     * @return Double - the balance in the currency
+     */
     public static Double isBalanceExist(AccountEntity acc, String currency) {
         try {
             if (currency.equals("USD")) {
@@ -34,4 +40,5 @@ public class BalanceChecker {
 
         return null;
     }
+
 }
