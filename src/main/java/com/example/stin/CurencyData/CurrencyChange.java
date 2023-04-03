@@ -2,6 +2,7 @@ package com.example.stin.CurencyData;
 
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -20,7 +21,7 @@ public class CurrencyChange {
         * This method is used to get the changes of the EUR currency.
      */
     public Double euroChanges() {
-        String currency = cnbData.SortCurrencyData(cnbData.getCurrencyData(cnbData.getURLFromDate(new Date())), "EUR").split("\\|")[4].replace(",", ".");
+        String currency = cnbData.SortCurrencyData(cnbData.getCurrencyData(cnbData.getURLFromDate(Calendar.getNow())), "EUR").split("\\|")[4].replace(",", ".");
         String oldCurrency;
         if (Calendar.isWeekend() || Calendar.isMonday()) {
             oldCurrency = cnbData.SortCurrencyData(cnbData.getCurrencyData(cnbData.getURLFromDate(Calendar.getThursdayDate())), "EUR").split("\\|")[4].replace(",", ".");
@@ -35,7 +36,7 @@ public class CurrencyChange {
         * This method is used to get the changes of the USD currency.
      */
     public Double usdChanges() {
-        String currency = cnbData.SortCurrencyData(cnbData.getCurrencyData(cnbData.getURLFromDate(new Date())), "USD").split("\\|")[4].replace(",", ".");
+        String currency = cnbData.SortCurrencyData(cnbData.getCurrencyData(cnbData.getURLFromDate(Calendar.getNow())), "USD").split("\\|")[4].replace(",", ".");
         String oldCurrency;
         if (Calendar.isWeekend() || Calendar.isMonday()) {
             oldCurrency = cnbData.SortCurrencyData(cnbData.getCurrencyData(cnbData.getURLFromDate(Calendar.getThursdayDate())), "USD").split("\\|")[4].replace(",", ".");
@@ -50,7 +51,7 @@ public class CurrencyChange {
         * This method is used to get the changes of the GBP currency.
      */
     public Double gbpChanges() {
-        String currency = cnbData.SortCurrencyData(cnbData.getCurrencyData(cnbData.getURLFromDate(new Date())), "GBP").split("\\|")[4].replace(",", ".");
+        String currency = cnbData.SortCurrencyData(cnbData.getCurrencyData(cnbData.getURLFromDate(Calendar.getNow())), "GBP").split("\\|")[4].replace(",", ".");
         String oldCurrency;
         if (Calendar.isWeekend() || Calendar.isMonday()) {
             oldCurrency = cnbData.SortCurrencyData(cnbData.getCurrencyData(cnbData.getURLFromDate(Calendar.getThursdayDate())), "GBP").split("\\|")[4].replace(",", ".");

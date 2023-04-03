@@ -17,7 +17,7 @@ import java.util.Objects;
 @Controller
 public class VerificationPageController {
 
-    private static String whoisit;
+    public static String whoisit;
 
     @Autowired
     private EmailService emailService;

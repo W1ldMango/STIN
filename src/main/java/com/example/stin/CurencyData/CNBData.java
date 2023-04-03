@@ -1,5 +1,6 @@
 package com.example.stin.CurencyData;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,8 @@ import java.util.List;
 @Service
 public class CNBData {
 
+    private static Calendar Calendar = new Calendar();
+
     /**
         * Define a url when we check the currency data.
      */
@@ -31,9 +34,9 @@ public class CNBData {
         * This method is used to get the url of the new currency data.
         * @param date - date of date we want to check
      */
-    public String getURLFromDate(Date date) {
+    public String getURLFromDate(String date) {
         DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
-        return URL+dateFormat.format(date);
+        return URL + date;
     }
 
     /**
@@ -73,21 +76,21 @@ public class CNBData {
     public String SortCurrencyData(List<String> currencyData, String currency) {
         for (String line : currencyData) {
             switch (currency) {
-                case "USD":
+                case "USD" -> {
                     if (line.contains("USD")) {
-                        return(line); // USD data
+                        return (line); // USD data
                     }
-                    break;
-                case "EUR":
+                }
+                case "EUR" -> {
                     if (line.contains("EUR")) {
-                        return(line); // EUR data
+                        return (line); // EUR data
                     }
-                    break;
-                case "GBP":
+                }
+                case "GBP" -> {
                     if (line.contains("GBP")) {
-                        return(line); // GBP data
+                        return (line); // GBP data
                     }
-                    break;
+                }
             }
         }
         return null;
@@ -99,7 +102,7 @@ public class CNBData {
      */
     @Scheduled(cron = "0 0 13-15 * * *")
     public String getUSD() {
-        return (SortCurrencyData(getCurrencyData(getURLFromDate(new Date())), "USD").split("\\|")[4]).replace(",", ".");
+        return (SortCurrencyData(getCurrencyData(getURLFromDate(Calendar.getNow())), "USD").split("\\|")[4]).replace(",", ".");
     }
 
     /**
@@ -108,7 +111,7 @@ public class CNBData {
      */
     @Scheduled(cron = "0 0 13-15 * * *")
     public String getEUR() {
-        return (SortCurrencyData(getCurrencyData(getURLFromDate(new Date())), "EUR").split("\\|")[4].replace(",", "."));
+        return (SortCurrencyData(getCurrencyData(getURLFromDate(Calendar.getNow())), "EUR").split("\\|")[4].replace(",", "."));
     }
 
     /**
@@ -117,7 +120,7 @@ public class CNBData {
      */
     @Scheduled(cron = "0 0 13-15 * * *")
     public String getGBP() {
-        return (SortCurrencyData(getCurrencyData(getURLFromDate(new Date())), "GBP").split("\\|")[4].replace(",", "."));
+        return (SortCurrencyData(getCurrencyData(getURLFromDate(Calendar.getNow())), "GBP").split("\\|")[4].replace(",", "."));
     }
 
 

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.List;
 
+
 /**
     * This class is used to handle the main page
  */
@@ -58,32 +59,39 @@ public class MainPageController {
                             @RequestParam(required = false) String transfer,
                             Model model) {
         UserEntity user = (UserEntity) model.getAttribute("user");
+        AccountEntity acc = accountRepository.findAllById(user.getId());
+        process(amount, payment_type, currency_list, transfer, acc);
+        return "redirect:/";
+    }
+    public void process(String amount,
+                        String payment_type,
+                        String currency_list,
+                        String transfer,
+                        AccountEntity account) {
         MoneyManager moneyManager = new MoneyManager();
         TransactionService transactionService = new TransactionService();
-        AccountEntity acc = accountRepository.findAllById(user.getId());
         if ((amount != null) && (transfer.equals(currency_list))) {
-            if (payment_type.equals("Payment") && moneyManager.isEnoughMoney(acc, Double.parseDouble(amount), currency_list)) {
-                moneyManager.payMoney(acc, Double.parseDouble(amount), currency_list);
-                accountRepository.save(acc);
-                transactionRepository.save(transactionService.CreateTransaction(acc, currency_list, Double.parseDouble(amount), payment_type));
-            } else if (((BalanceChecker.isBalanceExist(acc,currency_list)) > 0) && (payment_type.equals("Adding"))) {
-                moneyManager.addMoney(acc, Double.parseDouble(amount), currency_list);
-                accountRepository.save(acc);
-                transactionRepository.save(transactionService.CreateTransaction(acc, currency_list, Double.parseDouble(amount), payment_type));
+            if (payment_type.equals("Payment") && moneyManager.isEnoughMoney(account, Double.parseDouble(amount), currency_list)) {
+                moneyManager.payMoney(account, Double.parseDouble(amount), currency_list);
+                accountRepository.save(account);
+                transactionRepository.save(transactionService.CreateTransaction(account, currency_list, Double.parseDouble(amount), payment_type));
+            } else if (((BalanceChecker.isBalanceExist(account,currency_list)) > 0) && (payment_type.equals("Adding"))) {
+                moneyManager.addMoney(account, Double.parseDouble(amount), currency_list);
+                accountRepository.save(account);
+                transactionRepository.save(transactionService.CreateTransaction(account, currency_list, Double.parseDouble(amount), payment_type));
             }
-        } else if ((amount != null) && (BalanceChecker.isBalanceExist(acc, transfer) > 0)) {
+        } else if ((amount != null) && (BalanceChecker.isBalanceExist(account, transfer) > 0)) {
             if (payment_type.equals("Payment")) {
-                moneyManager.payMoney(acc, Double.parseDouble(amount), currency_list, transfer);
-                accountRepository.save(acc);
-                transactionRepository.save(transactionService.CreateTransaction(acc, currency_list, Double.parseDouble(amount), payment_type));
+                moneyManager.payMoney(account, Double.parseDouble(amount), currency_list, transfer);
+                accountRepository.save(account);
+                transactionRepository.save(transactionService.CreateTransaction(account, currency_list, Double.parseDouble(amount), payment_type));
             } else if (payment_type.equals("Adding")) {
-                moneyManager.addMoney(acc, Double.parseDouble(amount), currency_list, transfer);
-                accountRepository.save(acc);
-                transactionRepository.save(transactionService.CreateTransaction(acc, currency_list, Double.parseDouble(amount), payment_type));
+                moneyManager.addMoney(account, Double.parseDouble(amount), currency_list, transfer);
+                accountRepository.save(account);
+                transactionRepository.save(transactionService.CreateTransaction(account, currency_list, Double.parseDouble(amount), payment_type));
             }
         }
 
-        return "redirect:/";
     }
 
     /**
