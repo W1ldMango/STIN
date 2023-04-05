@@ -3,7 +3,7 @@ package com.example.stin.Bank.Transaction;
 import com.example.stin.Bank.Account.AccountEntity;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class TransactionServiceTest {
 

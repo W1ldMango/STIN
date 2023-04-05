@@ -18,7 +18,7 @@ jobs:
           cache: maven
 
       - name: Build with Maven
-        run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+        run: mvn compile -B
 
       - name: Test
         run: mvn test -B
