@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
     * This class is used to output the user's information in JSON format
  */
 
-@Controller
+@RestController
 public class JsonUserInfoOutput {
 
     @Autowired
@@ -40,7 +41,7 @@ public class JsonUserInfoOutput {
         * @return String - the JSON page
      */
     @RequestMapping(value = "/json", produces = "application/json")
-    public String json(Principal principal, Model model) {
+    public String json(Principal principal) {
         String email = principal.getName();
         UserEntity user = userRepository.findByEmail(email);
         AccountEntity account = accountRepository.findAllById(user.getId());
@@ -54,8 +55,7 @@ public class JsonUserInfoOutput {
         jsonObject.put("balanceEUR", account.getBalanceEUR());
         jsonObject.put("balanceCZK", account.getBalanceCZK());
         jsonObject.put("transactions", transactions);
-        model.addAttribute("json", jsonObject);
-        return "json";
+        return jsonObject.toString();
     }
 
 
