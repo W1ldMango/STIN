@@ -3,7 +3,9 @@ package com.example.stin.Bank.Transaction;
 import com.example.stin.Bank.Account.AccountEntity;
 import org.junit.jupiter.api.Test;
 
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 
 class TransactionServiceTest {
 
@@ -16,7 +18,7 @@ class TransactionServiceTest {
         String currency = "USD";
         Double amount = 1.0;
         String type = "Deposit";
-        assertNotNull(transactionService.CreateTransaction(accountEntity, currency, amount, type));
+        Assertions.assertNotNull(transactionService.CreateTransaction(accountEntity, currency, amount, type));
 
     }
 }
