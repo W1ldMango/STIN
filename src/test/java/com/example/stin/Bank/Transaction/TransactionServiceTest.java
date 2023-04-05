@@ -18,7 +18,7 @@ class TransactionServiceTest {
         String currency = "USD";
         Double amount = 1.0;
         String type = "Deposit";
-        Assertions.assertNotNull(transactionService.CreateTransaction(accountEntity, currency, amount, type));
+        assertNotNull(transactionService.CreateTransaction(accountEntity, currency, amount, type));
 
     }
 }
