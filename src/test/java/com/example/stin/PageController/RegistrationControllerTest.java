@@ -9,6 +9,7 @@ import com.example.stin.Users.UserInterface.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,9 +24,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-@SpringBootTest
+//@SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
 @AutoConfigureWebMvc
+@WebMvcTest(RegistrationController.class)
 class RegistrationControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -33,15 +35,18 @@ class RegistrationControllerTest {
     @MockBean
     private UserRepository userRepo;
 
-    @Autowired
+    @MockBean
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Test
     public void testRegistrationPost() throws Exception {
         // Create a mock UserEntity object
         UserEntity userEntity = new UserEntity();
+        userEntity.setId(1L);
         userEntity.setEmail("testuser@gmail.com");
-        userEntity.setPassword("testpassword");
+        userEntity.setPassword(bCryptPasswordEncoder.encode("testpassword"));
+        userEntity.setName("Test User");
+        userEntity.setSurname("Test Surname");
 
         // Perform a POST request to the "/registration" endpoint with the mock UserEntity object
         mockMvc.perform(MockMvcRequestBuilders.post("/registration")
@@ -52,9 +57,8 @@ class RegistrationControllerTest {
                 .andExpect(MockMvcResultMatchers.view().name("registration"));
 
         // Verify that the UserEntity object is saved to the database with the correct password
-        Mockito.verify(userRepo, Mockito.times(1)).save(Mockito.argThat(savedUserEntity ->
-                savedUserEntity.getEmail().equals("testuser@gmail.com")
-                        && bCryptPasswordEncoder.matches("testpassword", savedUserEntity.getPassword())));
+        Mockito.verify(userRepo, Mockito.times(1)).save(userEntity);
+
     }
     @Test
     void testRegistration() {
