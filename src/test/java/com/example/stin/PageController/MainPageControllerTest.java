@@ -4,34 +4,29 @@ import com.example.stin.Bank.Account.AccountEntity;
 import com.example.stin.Bank.Account.AccountRepository;
 import com.example.stin.Bank.Transaction.TransactionEntity;
 import com.example.stin.Bank.Transaction.TransactionRepository;
-import com.example.stin.CurencyData.CNBData;
 import com.example.stin.Users.UserDetails.UserEntity;
 import com.example.stin.Users.UserInterface.UserRepository;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
 
-import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
+@AutoConfigureWebMvc
 class MainPageControllerTest {
 
     @Autowired
@@ -59,7 +54,7 @@ class MainPageControllerTest {
 //
 //
 //        // Verify that GET request to "/" returns "main" view
-//        mockMvc.perform(MockMvcRequestBuilders.get("/").principal(principal).)
+//        mockMvc.perform(MockMvcRequestBuilders.get("/").principal(principal))
 //                .andExpect(status().isOk())
 //                .andExpect(view().name("main"));
 //    }
