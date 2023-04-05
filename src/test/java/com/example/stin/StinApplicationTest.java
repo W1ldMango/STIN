@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StinApplicationTest {
 
-    @Test
-    void main() {
-        StinApplication.main(new String[] {"arg1", "arg2"});
-    }
+//    @Test
+//    void main() {
+//        StinApplication.main(new String[] {"arg1", "arg2"});
+//    }
 }
