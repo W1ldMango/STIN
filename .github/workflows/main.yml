@@ -22,6 +22,10 @@ jobs:
 
       - name: Test
         run: mvn test -B
+      - name: Generate JaCoCo Badge
+        uses: cicirello/jacoco-badge-generator@v2
+        with:
+          generate-branches-badge: true
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
